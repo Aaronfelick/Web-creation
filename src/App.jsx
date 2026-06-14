@@ -6,6 +6,7 @@ import {
   GlassSection,
   SectionHeading,
 } from "./components/GlassLayout";
+import { CaseStudyCarousel } from "./components/CaseStudyCarousel";
 import { HeroSection } from "./components/HeroSection";
 import { Navbar } from "./components/Navbar";
 
@@ -58,6 +59,8 @@ export default function App() {
             ))}
           </GlassGrid>
         </GlassSection>
+
+        <CaseStudyCarousel />
 
         <GlassSection id="pricing">
           <GlassPanel className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_0.82fr] lg:p-10">
