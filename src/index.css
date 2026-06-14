@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==================================================================
+ * BASE
+ * ================================================================== */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-white/10;
+  }
+
+  html {
+    @apply scroll-smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink text-white/80 font-sans antialiased;
+    font-feature-settings: "ss01", "cv01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Persistent premium dark canvas: mesh + spotlight + vignette */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: theme("backgroundImage.gradient-mesh");
+    pointer-events: none;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: theme("backgroundImage.gradient-ink");
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-heading font-bold tracking-tight text-white;
+  }
+
+  ::selection {
+    @apply bg-brand/30 text-white;
+  }
+
+  /* Refined scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-white/10;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/20;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand/60 ring-offset-2 ring-offset-ink;
+  }
+}
+
+/* ==================================================================
+ * COMPONENT PRIMITIVES (glass design system)
+ * ================================================================== */
+@layer components {
+  /* Frosted glass surface */
+  .glass {
+    @apply border border-white/10 bg-white/[0.06] backdrop-blur-lg backdrop-saturate-150 shadow-glass;
+  }
+
+  .glass-strong {
+    @apply border border-white/10 bg-ink-900/60 backdrop-blur-xl backdrop-saturate-150 shadow-glass-lg;
+  }
+
+  /* Subtle top sheen overlay for glass panels */
+  .glass-sheen {
+    @apply relative overflow-hidden;
+  }
+  .glass-sheen::before {
+    content: "";
+    @apply pointer-events-none absolute inset-0 bg-gradient-glass opacity-60;
+  }
+
+  /* Gradient hairline divider */
+  .hairline {
+    @apply h-px w-full bg-gradient-hairline;
+  }
+
+  /* Animated gradient text */
+  .text-gradient {
+    @apply bg-gradient-text bg-clip-text text-transparent;
+    background-size: 200% auto;
+  }
+
+  /* Eyebrow chip */
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1.5 text-xs font-medium uppercase tracking-widest text-white/70 backdrop-blur-md;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Radial mask used for fading grids / glows toward edges */
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
