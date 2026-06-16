@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Network — Delman Shipping</title>
+  <meta name="description" content="Explore Delman Shipping's global network on an interactive 3D globe — destinations and hubs across six continents from our Dubai headquarters." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="brand"><span class="logo-mark">D</span><span>Delman<small>BEYOND LOGISTICS</small></span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="network.html" class="active">Network</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="quote.html" class="btn btn-primary btn-quote-desktop">Get a Quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container reveal">
+      <span class="eyebrow">Our Global Presence</span>
+      <h1>Where We <span class="gradient-text">Ship</span></h1>
+      <p>From our headquarters in Dubai we have soared to new heights — explore the destinations connected by the Delman network on our interactive globe.</p>
+      <div class="breadcrumb"><a href="index.html">Home</a> / Network</div>
+    </div>
+  </section>
+
+  <!-- GLOBE -->
+  <section class="section globe-section" style="padding-top:10px;">
+    <div class="container">
+      <div class="globe-wrap reveal">
+        <div class="globe-legend glass">
+          <div class="legend-item"><span class="dot" style="background:#1fbecf;"></span> Headquarters — Dubai</div>
+          <div class="legend-item"><span class="dot" style="background:#6aa744;"></span> Network Destinations</div>
+        </div>
+        <div id="globeViz"></div>
+        <div class="globe-hint">🖱️ Drag to rotate · Scroll to zoom · Hover points</div>
+      </div>
+
+      <!-- COUNTRY CHIPS -->
+      <div class="country-chips reveal">
+        <span class="chip"><span class="flag">🇦🇪</span> Dubai (HQ)</span>
+        <span class="chip"><span class="flag">🇦🇪</span> Al Garhoud, Dubai</span>
+        <span class="chip"><span class="flag">🇦🇪</span> Jebel Ali, Dubai</span>
+        <span class="chip"><span class="flag">🇮🇳</span> Mumbai</span>
+        <span class="chip"><span class="flag">🇮🇳</span> Cochin</span>
+        <span class="chip"><span class="flag">🇳🇱</span> Amsterdam</span>
+        <span class="chip"><span class="flag">🇦🇺</span> Melbourne</span>
+        <span class="chip"><span class="flag">🇺🇸</span> New York</span>
+        <span class="chip"><span class="flag">🇧🇷</span> Brazil</span>
+        <span class="chip"><span class="flag">🇺🇬</span> Uganda</span>
+        <span class="chip"><span class="flag">🇳🇬</span> Nigeria</span>
+        <span class="chip"><span class="flag">🇰🇪</span> Kenya</span>
+        <span class="chip"><span class="flag">🇭🇰</span> Hong Kong</span>
+        <span class="chip"><span class="flag">🇨🇳</span> Shanghai</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NETWORK COPY -->
+  <section class="section" style="padding-top:0;">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">Global Network Agencies</span>
+        <h2>Seamless logistics, on a global scale.</h2>
+        <p>Delman takes pride in being a valued member of a global network of agencies. This affiliation empowers us to provide seamless and efficient logistics solutions worldwide.</p>
+        <p>Leveraging strong partnerships and collaborative efforts, we ensure that your cargo reaches its destination with precision and reliability — upholding our commitment to delivering excellence in every aspect of our services.</p>
+      </div>
+      <div class="reveal">
+        <div class="stat-band">
+          <div class="stat-box"><strong class="gradient-text">6</strong><p>Continents</p></div>
+          <div class="stat-box"><strong class="gradient-text">13+</strong><p>Key Hubs</p></div>
+          <div class="stat-box"><strong class="gradient-text">2</strong><p>HQ Offices, Dubai</p></div>
+          <div class="stat-box"><strong class="gradient-text">+1</strong><p>New: Mumbai</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="container reveal">
+      <div class="cta-banner">
+        <h2>Ship anywhere with confidence.</h2>
+        <p>Wherever your cargo needs to go, the Delman network connects you there.</p>
+        <a href="quote.html" class="btn btn-dark">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/globe.gl@2.32.0/dist/globe.gl.min.js"></script>
+  <script src="js/globe.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

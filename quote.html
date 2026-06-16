@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get a Quote — Delman Shipping</title>
+  <meta name="description" content="Request a tailored shipping quote from Delman. Choose Air, Sea, Land or Personal shipping, select Export or Import, and share your shipment details." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="brand"><span class="logo-mark">D</span><span>Delman<small>BEYOND LOGISTICS</small></span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="network.html">Network</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="quote.html" class="btn btn-primary btn-quote-desktop active">Get a Quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container reveal">
+      <span class="eyebrow">Request a Quote</span>
+      <h1>Get Your <span class="gradient-text">Shipping Quote</span></h1>
+      <p>Answer a few quick questions and our team will build a tailored logistics solution for you.</p>
+      <div class="breadcrumb"><a href="index.html">Home</a> / Get a Quote</div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:20px;">
+    <div class="container">
+      <div class="wizard glass reveal">
+
+        <!-- progress -->
+        <div class="wizard-progress" id="wizardProgress">
+          <div class="wp-line" id="wpLine"></div>
+          <div class="wp-step active" data-step="1"><div class="wp-dot">1</div><span>Mode</span></div>
+          <div class="wp-step" data-step="2"><div class="wp-dot">2</div><span>Direction</span></div>
+          <div class="wp-step" data-step="3"><div class="wp-dot">3</div><span>Details</span></div>
+          <div class="wp-step" data-step="4"><div class="wp-dot">4</div><span>Contact</span></div>
+        </div>
+
+        <form id="quoteForm">
+
+          <!-- STEP 1: MODE -->
+          <div class="wizard-step active" data-step="1">
+            <h3>What would you like to ship?</h3>
+            <p class="step-sub">Select your preferred shipping mode.</p>
+            <div class="option-grid four">
+              <div class="option" data-field="mode" data-value="Air Freight"><div class="opt-ic">✈️</div><h4>Air</h4><p>Fast &amp; global</p></div>
+              <div class="option" data-field="mode" data-value="Sea Freight"><div class="opt-ic">🚢</div><h4>Sea</h4><p>FCL · LCL · RORO</p></div>
+              <div class="option" data-field="mode" data-value="Land Freight"><div class="opt-ic">🚛</div><h4>Land</h4><p>GCC &amp; cross-border</p></div>
+              <div class="option" data-field="mode" data-value="Personal Shipping"><div class="opt-ic">🏠</div><h4>Personal</h4><p>Household &amp; relocation</p></div>
+            </div>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-primary" data-next disabled id="next1" style="margin-left:auto;">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 2: DIRECTION -->
+          <div class="wizard-step" data-step="2">
+            <h3>Export or Import?</h3>
+            <p class="step-sub">Tell us the direction of your shipment.</p>
+            <div class="option-grid">
+              <div class="option" data-field="direction" data-value="Export"><div class="opt-ic">📤</div><h4>Export</h4><p>Shipping out of origin</p></div>
+              <div class="option" data-field="direction" data-value="Import"><div class="opt-ic">📥</div><h4>Import</h4><p>Bringing cargo in</p></div>
+            </div>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-glass" data-prev>← Back</button>
+              <button type="button" class="btn btn-primary" data-next disabled id="next2">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: DETAILS -->
+          <div class="wizard-step" data-step="3">
+            <h3>Shipment details</h3>
+            <p class="step-sub">The more we know, the more accurate your quote.</p>
+            <div class="form-grid">
+              <div class="field"><label>Origin (From)</label><input type="text" name="origin" placeholder="City / Country" required /></div>
+              <div class="field"><label>Destination (To)</label><input type="text" name="destination" placeholder="City / Country" required /></div>
+              <div class="field"><label>Cargo Type</label>
+                <select name="cargoType">
+                  <option value="General Cargo">General Cargo</option>
+                  <option value="Perishables">Perishables</option>
+                  <option value="Dangerous Goods">Dangerous Goods</option>
+                  <option value="Pharmaceuticals">Pharmaceuticals</option>
+                  <option value="Project / Heavy Lift">Project / Heavy Lift</option>
+                  <option value="AOG / Aerospace">AOG / Aerospace</option>
+                  <option value="Personal / Household">Personal / Household</option>
+                </select>
+              </div>
+              <div class="field"><label>Approx. Weight (kg)</label><input type="number" name="weight" min="0" placeholder="e.g. 500" /></div>
+              <div class="field"><label>Dimensions (L×W×H cm)</label><input type="text" name="dimensions" placeholder="e.g. 120×80×100" /></div>
+              <div class="field"><label>Ready Date</label><input type="date" name="readyDate" /></div>
+              <div class="field full"><label>Additional Notes</label><textarea name="notes" placeholder="Special handling, incoterms, value-added services..."></textarea></div>
+            </div>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-glass" data-prev>← Back</button>
+              <button type="button" class="btn btn-primary" data-next id="next3">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 4: CONTACT + SUMMARY -->
+          <div class="wizard-step" data-step="4">
+            <h3>Almost there!</h3>
+            <p class="step-sub">Add your contact details and review your request.</p>
+
+            <div class="quote-summary" id="quoteSummary">
+              <h4>Your Request</h4>
+              <div class="sum-row"><span>Shipping Mode</span><span data-sum="mode">—</span></div>
+              <div class="sum-row"><span>Direction</span><span data-sum="direction">—</span></div>
+              <div class="sum-row"><span>Route</span><span data-sum="route">—</span></div>
+              <div class="sum-row"><span>Cargo Type</span><span data-sum="cargoType">—</span></div>
+              <div class="sum-row"><span>Weight</span><span data-sum="weight">—</span></div>
+            </div>
+
+            <div class="form-grid">
+              <div class="field"><label>First Name</label><input type="text" name="firstName" required placeholder="John" /></div>
+              <div class="field"><label>Last Name</label><input type="text" name="lastName" required placeholder="Doe" /></div>
+              <div class="field"><label>Email</label><input type="email" name="email" required placeholder="you@email.com" /></div>
+              <div class="field"><label>Phone Number</label><input type="tel" name="phone" required placeholder="+971 ..." /></div>
+              <div class="field full"><label>Company (optional)</label><input type="text" name="company" placeholder="Company name" /></div>
+            </div>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-glass" data-prev>← Back</button>
+              <button type="submit" class="btn btn-primary">Submit Request ✓</button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- SUCCESS -->
+        <div class="wizard-success" id="wizardSuccess">
+          <div class="check-circle">✓</div>
+          <h3>Quote request received!</h3>
+          <p class="step-sub">Thank you, <span id="successName">there</span>. Our logistics experts will review your <strong id="successMode">shipment</strong> request and get back to you shortly.</p>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:10px;">
+            <a href="index.html" class="btn btn-glass">Back to Home</a>
+            <button type="button" class="btn btn-primary" id="newQuote">Start a New Quote</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+  <script src="js/main.js"></script>
+  <script src="js/quote.js"></script>
+</body>
+</html>
