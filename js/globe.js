@@ -1,6 +1,7 @@
 /* =========================================================
-   DELMAN SHIPPING — Interactive 3D Globe
-   Powered by globe.gl (three.js). Falls back gracefully.
+   DELMAN SHIPPING — Interactive 3D Globe (Google Earth style)
+   Powered by globe.gl (three.js). Lit-up served countries,
+   animated routes, HQ ring. Falls back gracefully.
    ========================================================= */
 (function () {
   const el = document.getElementById('globeViz');
@@ -24,45 +25,86 @@
     { name: 'Shanghai, China', lat: 31.2304, lng: 121.4737 }
   ];
 
-  const points = [{ ...HQ }, ...destinations];
+  // Countries we transport to (match ADMIN names in the GeoJSON)
+  const SERVED = new Set([
+    'United Arab Emirates', 'India', 'Netherlands', 'Australia',
+    'United States of America', 'Brazil', 'Uganda', 'Nigeria',
+    'Kenya', 'China', 'Hong Kong S.A.R.'
+  ]);
 
+  const points = [{ ...HQ }, ...destinations];
   const arcs = destinations.map(d => ({
-    startLat: HQ.lat, startLng: HQ.lng,
-    endLat: d.lat, endLng: d.lng
+    startLat: HQ.lat, startLng: HQ.lng, endLat: d.lat, endLng: d.lng
   }));
 
-  function buildGlobe() {
+  const CDN = 'https://unpkg.com/three-globe@2.31.0/example/img';
+
+  function buildGlobe(countries) {
     try {
+      const features = (countries && countries.features) ? countries.features : [];
+
       const world = Globe()(el)
         .backgroundColor('rgba(0,0,0,0)')
+        .backgroundImageUrl(`${CDN}/night-sky.png`)
+        .globeImageUrl(`${CDN}/earth-blue-marble.jpg`)
+        .bumpImageUrl(`${CDN}/earth-topology.png`)
         .showAtmosphere(true)
         .atmosphereColor('#1fbecf')
-        .atmosphereAltitude(0.18)
-        .globeImageUrl('https://unpkg.com/three-globe@2.31.0/example/img/earth-dark.jpg')
+        .atmosphereAltitude(0.22)
+
+        // ---- Lit-up served countries ----
+        .polygonsData(features.filter(f => f.properties.ADMIN !== 'Antarctica'))
+        .polygonAltitude(f => (SERVED.has(f.properties.ADMIN) ? 0.06 : 0.008))
+        .polygonCapColor(f => (SERVED.has(f.properties.ADMIN)
+          ? 'rgba(106,167,68,0.85)' : 'rgba(255,255,255,0.04)'))
+        .polygonSideColor(f => (SERVED.has(f.properties.ADMIN)
+          ? 'rgba(31,190,207,0.45)' : 'rgba(0,0,0,0)'))
+        .polygonStrokeColor(f => (SERVED.has(f.properties.ADMIN)
+          ? '#7dc451' : 'rgba(255,255,255,0.12)'))
+        .polygonLabel(f => (SERVED.has(f.properties.ADMIN)
+          ? `<div style="font-family:Inter,sans-serif;background:rgba(10,13,12,0.92);border:1px solid rgba(125,196,81,0.5);padding:6px 12px;border-radius:10px;color:#fff;font-size:12px;"><b>${f.properties.ADMIN}</b><br/><span style="color:#7dc451;">Delman destination</span></div>`
+          : ''))
+
+        // ---- Markers ----
         .pointsData(points)
-        .pointLat('lat')
-        .pointLng('lng')
-        .pointColor(d => (d.hq ? '#1fbecf' : '#6aa744'))
-        .pointAltitude(d => (d.hq ? 0.08 : 0.045))
-        .pointRadius(d => (d.hq ? 0.6 : 0.4))
-        .pointLabel(d => `<div style="font-family:Inter,sans-serif;background:rgba(10,13,12,0.9);border:1px solid rgba(255,255,255,0.15);padding:6px 12px;border-radius:10px;color:#fff;font-size:12px;">${d.name}</div>`)
+        .pointLat('lat').pointLng('lng')
+        .pointColor(d => (d.hq ? '#1fbecf' : '#eafff0'))
+        .pointAltitude(d => (d.hq ? 0.09 : 0.05))
+        .pointRadius(d => (d.hq ? 0.55 : 0.32))
+        .pointLabel(d => `<div style="font-family:Inter,sans-serif;background:rgba(10,13,12,0.92);border:1px solid rgba(255,255,255,0.18);padding:6px 12px;border-radius:10px;color:#fff;font-size:12px;">${d.name}</div>`)
+
+        // ---- Animated routes ----
         .arcsData(arcs)
         .arcColor(() => ['#6aa744', '#1fbecf'])
-        .arcStroke(0.5)
-        .arcAltitude(0.22)
+        .arcStroke(0.55)
+        .arcAltitudeAutoScale(0.4)
         .arcDashLength(0.5)
-        .arcDashGap(0.25)
+        .arcDashGap(0.22)
         .arcDashAnimateTime(2600)
+
+        // ---- HQ pulse ring ----
         .ringsData([{ ...HQ }])
-        .ringLat('lat')
-        .ringLng('lng')
-        .ringColor(() => '#1fbecf')
-        .ringMaxRadius(4)
-        .ringPropagationSpeed(2)
-        .ringRepeatPeriod(1100);
+        .ringLat('lat').ringLng('lng')
+        .ringColor(() => (t => `rgba(31,190,207,${Math.sqrt(1 - t)})`))
+        .ringMaxRadius(5)
+        .ringPropagationSpeed(2.4)
+        .ringRepeatPeriod(900);
+
+      // material tweak for shininess (Google Earth feel)
+      const globeMat = world.globeMaterial();
+      if (globeMat) {
+        globeMat.bumpScale = 8;
+        if (window.THREE) {
+          new THREE.TextureLoader().load(`${CDN}/earth-water.png`, tex => {
+            globeMat.specularMap = tex;
+            globeMat.specular = new THREE.Color('#143b3f');
+            globeMat.shininess = 14;
+          });
+        }
+      }
 
       function size() {
-        const w = el.clientWidth || el.offsetWidth;
+        const w = el.clientWidth || el.offsetWidth || 800;
         world.width(w).height(560);
       }
       size();
@@ -70,9 +112,11 @@
 
       const controls = world.controls();
       controls.autoRotate = true;
-      controls.autoRotateSpeed = 0.6;
+      controls.autoRotateSpeed = 0.55;
       controls.enableZoom = true;
-      world.pointOfView({ lat: 22, lng: 50, altitude: 2.2 });
+      controls.minDistance = 180;
+      controls.maxDistance = 600;
+      world.pointOfView({ lat: 22, lng: 50, altitude: 2.3 });
     } catch (err) {
       console.warn('Globe failed, using fallback.', err);
       showFallback();
@@ -83,22 +127,25 @@
     el.innerHTML = `
       <div style="display:grid;place-items:center;height:100%;text-align:center;padding:40px;">
         <div>
-          <div style="font-size:4rem;margin-bottom:14px;">🌍</div>
+          <img src="assets/img/world-map.webp" alt="Delman global network map" style="max-width:90%;border-radius:16px;opacity:.92;margin-bottom:18px;" />
           <h3 style="font-family:Poppins,sans-serif;">Delman Global Network</h3>
-          <p style="color:#8a958f;max-width:420px;margin:10px auto 0;">Connecting Dubai with 13+ destinations across six continents. See the full list of hubs below.</p>
+          <p style="color:#8a958f;max-width:420px;margin:10px auto 0;">Connecting Dubai with destinations across six continents. See the full list of hubs below.</p>
         </div>
       </div>`;
   }
 
-  // Wait for globe.gl; fallback if not available shortly.
+  function start() {
+    fetch('assets/countries.geojson')
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(buildGlobe)
+      .catch(() => buildGlobe(null)); // still render globe without polygons
+  }
+
+  // Wait for globe.gl library, then start.
   let tries = 0;
   (function waitForGlobe() {
-    if (typeof Globe !== 'undefined') {
-      buildGlobe();
-    } else if (tries++ < 40) {
-      setTimeout(waitForGlobe, 150);
-    } else {
-      showFallback();
-    }
+    if (typeof Globe !== 'undefined') start();
+    else if (tries++ < 50) setTimeout(waitForGlobe, 150);
+    else showFallback();
   })();
 })();

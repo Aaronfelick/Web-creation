@@ -13,12 +13,13 @@
 <body>
 
   <nav class="navbar" id="navbar">
-    <a href="index.html" class="brand"><span class="logo-mark">D</span><span>Delman<small>BEYOND LOGISTICS</small></span></a>
+    <a href="index.html" class="brand"><img src="assets/img/delman-logo.webp" alt="Delman Shipping" class="brand-logo" /></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About Us</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="network.html">Network</a></li>
+      <li><a href="track.html">Track</a></li>
       <li><a href="career.html">Career</a></li>
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -145,9 +146,28 @@
           <div class="check-circle">✓</div>
           <h3>Quote request received!</h3>
           <p class="step-sub">Thank you, <span id="successName">there</span>. Our logistics experts will review your <strong id="successMode">shipment</strong> request and get back to you shortly.</p>
-          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:10px;">
+
+          <div class="tracking-box">
+            <div class="tn-row">
+              <div>
+                <span class="tn-label">Your Tracking Number</span>
+                <span class="tn-value" id="trackingNoOut">DLMN-—</span>
+              </div>
+              <button type="button" class="btn btn-glass" id="copyTrackBtn">Copy number</button>
+            </div>
+            <div class="tn-row" style="border-top:1px dashed var(--glass-border);padding-top:14px;">
+              <div>
+                <span class="tn-label">Bill / Reference No.</span>
+                <span class="tn-value" id="billNoOut" style="font-size:1.1rem;">BL-—</span>
+              </div>
+            </div>
+            <p class="tn-hint">Save this number — enter it under <strong>Track My Package</strong> to follow your shipment's progress in real time.</p>
+          </div>
+
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:6px;">
+            <a href="track.html" id="trackNowBtn" class="btn btn-primary">📍 Track My Package</a>
+            <button type="button" class="btn btn-glass" id="newQuote">Start a New Quote</button>
             <a href="index.html" class="btn btn-glass">Back to Home</a>
-            <button type="button" class="btn btn-primary" id="newQuote">Start a New Quote</button>
           </div>
         </div>
 

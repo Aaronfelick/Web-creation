@@ -103,6 +103,28 @@
   const next3 = document.getElementById('next3');
   if (next3) next3.addEventListener('click', () => { if (validateStep(3)) updateSummary(); });
 
+  /* ---- tracking / bill number generation ---- */
+  function genCode(len, chars) {
+    let out = '';
+    for (let i = 0; i < len; i++) out += chars[Math.floor(Math.random() * chars.length)];
+    return out;
+  }
+  function makeTrackingNo() {
+    const d = new Date();
+    const ymd = '' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+    return 'DLMN-' + ymd + '-' + genCode(4, 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789');
+  }
+  function makeBillNo() {
+    return 'BL-' + genCode(8, '0123456789');
+  }
+  function saveShipment(record) {
+    try {
+      const all = JSON.parse(localStorage.getItem('delman_shipments') || '{}');
+      all[record.trackingNo] = record;
+      localStorage.setItem('delman_shipments', JSON.stringify(all));
+    } catch (e) { /* storage unavailable — tracking will fall back to synthetic */ }
+  }
+
   /* ---- submit ---- */
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -110,12 +132,43 @@
       flash('Please complete your contact details.');
       return;
     }
-    // In production this would POST to a backend / email service.
+    updateSummary();
+
+    const trackingNo = makeTrackingNo();
+    const billNo = makeBillNo();
+    const record = {
+      trackingNo, billNo,
+      createdAt: Date.now(),
+      mode: data.mode || 'Air Freight',
+      direction: data.direction || 'Export',
+      origin: data.origin || '',
+      destination: data.destination || '',
+      cargoType: data.cargoType || 'General Cargo',
+      weight: data.weight || 'To be advised',
+      customer: form.firstName.value.trim() + ' ' + form.lastName.value.trim(),
+      email: form.email.value.trim(),
+      company: form.company.value.trim()
+    };
+    saveShipment(record);
+
+    // In production this would also POST to a backend / email service.
     form.style.display = 'none';
     document.getElementById('wizardProgress').style.display = 'none';
     const success = document.getElementById('wizardSuccess');
     document.getElementById('successName').textContent = form.firstName.value.trim();
     document.getElementById('successMode').textContent = (data.mode || 'shipment') + (data.direction ? ' (' + data.direction + ')' : '');
+    const tnEl = document.getElementById('trackingNoOut');
+    const blEl = document.getElementById('billNoOut');
+    if (tnEl) tnEl.textContent = trackingNo;
+    if (blEl) blEl.textContent = billNo;
+    const trackBtn = document.getElementById('trackNowBtn');
+    if (trackBtn) trackBtn.href = 'track.html?id=' + encodeURIComponent(trackingNo);
+    const copyBtn = document.getElementById('copyTrackBtn');
+    if (copyBtn) copyBtn.onclick = () => {
+      navigator.clipboard && navigator.clipboard.writeText(trackingNo);
+      copyBtn.textContent = '✓ Copied';
+      setTimeout(() => copyBtn.textContent = 'Copy number', 1800);
+    };
     success.classList.add('show');
     window.scrollTo({ top: success.getBoundingClientRect().top + window.scrollY - 160, behavior: 'smooth' });
   });

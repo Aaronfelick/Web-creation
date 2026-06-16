@@ -9,8 +9,7 @@ const footerHTML = `
     <div class="footer-grid">
       <div>
         <a href="index.html" class="brand">
-          <span class="logo-mark">D</span>
-          <span>Delman<small>BEYOND LOGISTICS</small></span>
+          <img src="assets/img/delman-logo.webp" alt="Delman Shipping" class="brand-logo" />
         </a>
         <p class="f-about">A leading freight forwarding &amp; logistics provider since 2010, delivering exceptional end-to-end solutions across six continents.</p>
         <div class="social" style="margin-top:20px;">
@@ -24,6 +23,7 @@ const footerHTML = `
         <ul>
           <li><a href="about.html">About Us</a></li>
           <li><a href="network.html">Global Network</a></li>
+          <li><a href="track.html">Track My Package</a></li>
           <li><a href="career.html">Careers</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Track My Package — Delman Shipping</title>
+  <meta name="description" content="Track your Delman shipment in real time. Enter your tracking number or bill reference to see a detailed status timeline." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="brand"><img src="assets/img/delman-logo.webp" alt="Delman Shipping" class="brand-logo" /></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="network.html">Network</a></li>
+      <li><a href="track.html" class="active">Track</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="quote.html" class="btn btn-primary btn-quote-desktop">Get a Quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container reveal">
+      <span class="eyebrow">Shipment Visibility</span>
+      <h1>Track My <span class="gradient-text">Package</span></h1>
+      <p>Enter the tracking number or bill reference you received with your quote to see exactly what's happening with your shipment.</p>
+      <div class="breadcrumb"><a href="index.html">Home</a> / Track</div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:20px;">
+    <div class="container">
+
+      <div class="track-search reveal">
+        <form id="trackForm">
+          <input type="text" id="trackInput" placeholder="e.g. DLMN-20260616-AB12 or BL-12345678" autocomplete="off" />
+          <button type="submit" class="btn btn-primary">Track →</button>
+        </form>
+        <div class="track-error" id="trackError"></div>
+        <div class="track-samples" id="trackSamples"></div>
+      </div>
+
+      <div class="track-result" id="trackResult">
+        <div class="track-head">
+          <div>
+            <h3 id="trHeadNo">DLMN-—</h3>
+            <div class="th-meta">
+              <div><span class="k">Bill No.</span><span class="v" id="trBill">—</span></div>
+              <div><span class="k">Service</span><span class="v" id="trMode">—</span></div>
+              <div><span class="k">Direction</span><span class="v" id="trDir">—</span></div>
+              <div><span class="k">Route</span><span class="v" id="trRoute">—</span></div>
+              <div><span class="k">Cargo</span><span class="v" id="trCargo">—</span></div>
+            </div>
+          </div>
+          <div class="status-pill" id="trStatus">In Progress</div>
+        </div>
+
+        <div class="track-progress-bar"><i id="trBar"></i></div>
+
+        <div class="timeline" id="trTimeline"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="footer"></div>
+  <script src="js/main.js"></script>
+  <script src="js/track.js"></script>
+</body>
+</html>
