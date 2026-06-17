@@ -5,6 +5,8 @@ A complete, modern, glass-morphism redesign of the [Delman Shipping](https://del
 ## ✨ Features
 
 - **Glass morphism UI** — frosted-glass floating navbar, cards, buttons and panels.
+- **Light & dark mode** — a navbar toggle (☀️/🌙) switches themes; the choice is saved in `localStorage` and applied before paint (no flash). Light is the default.
+- **Fully mobile-responsive** — text, images, the globe and the quote/track flows scale down gracefully on phones while keeping the design elegant (breakpoints at 1024 / 860 / 640 / 400 px).
 - **Brand color scheme** — strictly **black**, **white**, **green `#6aa744`** and **cyan `#1fbecf`** with smooth green→cyan gradients.
 - **Interactive 3D globe** (`network.html`) — built with [globe.gl](https://globe.gl) showing Delman's HQ in Dubai and animated arcs to every destination it ships to, with a graceful fallback if the library can't load.
 - **Multi-step "Get a Quote" wizard** (`quote.html`):
@@ -54,6 +56,7 @@ python3 -m http.server 8000
 ## 📝 Notes
 
 - Forms are front-end demos (no backend). Wire them to your email/CRM service for production.
+- The hero image loads `assets/img/Picture1.png` if present and otherwise falls back to a bundled photo. Drop your own `Picture1.png` into `assets/img/` to use it on the home page.
 - `assets/ceo.svg` is a stylized placeholder portrait — replace it with an official photo of the Founder & CEO when available.
 - Globe textures and the globe.gl library load from CDNs, so the globe page needs an internet connection (a styled fallback shows otherwise).
 

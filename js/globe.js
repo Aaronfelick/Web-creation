@@ -105,7 +105,9 @@
 
       function size() {
         const w = el.clientWidth || el.offsetWidth || 800;
-        world.width(w).height(560);
+        const h = Math.max(360, Math.min(560, Math.round(window.innerHeight * 0.62)));
+        el.style.height = h + 'px';
+        world.width(w).height(h);
       }
       size();
       window.addEventListener('resize', size);

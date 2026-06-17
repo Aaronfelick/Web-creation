@@ -57,6 +57,24 @@ const footerHTML = `
 const footerMount = document.getElementById('footer');
 if (footerMount) footerMount.innerHTML = footerHTML;
 
+/* ---------- Theme toggle (light / dark) ---------- */
+(function () {
+  const root = document.documentElement;
+  if (!root.getAttribute('data-theme')) {
+    let saved = null;
+    try { saved = localStorage.getItem('delman-theme'); } catch (e) {}
+    root.setAttribute('data-theme', saved === 'dark' ? 'dark' : 'light');
+  }
+  const toggle = document.getElementById('themeToggle');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('delman-theme', next); } catch (e) {}
+    });
+  }
+})();
+
 /* ---------- Navbar scroll state ---------- */
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
