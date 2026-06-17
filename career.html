@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career — Delman Shipping</title>
+  <meta name="description" content="Build your career at Delman Shipping. Join a dynamic team of logistics specialists across six continents. Apply today." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>(function(){try{var t=localStorage.getItem('delman-theme');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="brand"><img src="assets/img/delman-logo.webp" alt="Delman Shipping" class="brand-logo" /></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="network.html">Network</a></li>
+      <li><a href="track.html">Track</a></li>
+      <li><a href="career.html" class="active">Career</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode" title="Toggle theme"><span class="ti-sun">☀️</span><span class="ti-moon">🌙</span></button>
+      <a href="quote.html" class="btn btn-primary btn-quote-desktop">Get a Quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container reveal">
+      <span class="eyebrow">Join Our Team</span>
+      <h1>Build Your <span class="gradient-text">Career</span></h1>
+      <p>Our dynamic team blends youthful exuberance with seasoned professionalism. Grow with a company that keeps expanding every year with newer clients, talents and projects.</p>
+      <div class="breadcrumb"><a href="index.html">Home</a> / Career</div>
+    </div>
+  </section>
+
+  <!-- WHY WORK WITH US -->
+  <section class="section" style="padding-top:30px;">
+    <div class="container">
+      <div class="grid grid-3">
+        <div class="card reveal"><div class="card-icon">🌱</div><h3>Grow With Us</h3><p>We keep growing every year with newer clients and talents — and so will you.</p></div>
+        <div class="card reveal"><div class="card-icon">🌍</div><h3>Global Exposure</h3><p>Work across six continents with a truly international logistics network.</p></div>
+        <div class="card reveal"><div class="card-icon">🤝</div><h3>People First</h3><p>A culture built on accountability, commitment, reliability and speedy response.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="section" style="padding-top:0;">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">Apply Now</span>
+        <h2>Contact with our team.</h2>
+        <p>Any sensible idea that's worth it never goes unattended by us. Send across your details and CV — we'd love to hear from you.</p>
+        <div class="info-list" style="margin-top:24px;">
+          <div class="info-item"><span class="info-ic">📍</span><div><h4>Location</h4><p>Al Garhoud — Dubai — United Arab Emirates</p></div></div>
+          <div class="info-item"><span class="info-ic">✉️</span><div><h4>Email</h4><p>careers@delmanshipping.com</p></div></div>
+          <div class="info-item"><span class="info-ic">☎️</span><div><h4>Phone</h4><p>+971 4 25 25 505</p></div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <form class="form-card glass" data-demo>
+          <div class="form-grid">
+            <div class="field"><label>First Name</label><input type="text" name="firstName" required placeholder="John" /></div>
+            <div class="field"><label>Second Name</label><input type="text" name="secondName" required placeholder="Doe" /></div>
+            <div class="field"><label>Email</label><input type="email" name="email" required placeholder="you@email.com" /></div>
+            <div class="field"><label>Phone No</label><input type="tel" name="phone" required placeholder="+971 ..." /></div>
+            <div class="field full"><label>Education</label><input type="text" name="education" placeholder="e.g. Bachelor's in Logistics" /></div>
+            <div class="field full"><label>Message</label><textarea name="message" placeholder="Tell us about yourself and the role you're interested in..."></textarea></div>
+            <div class="field full">
+              <label>Upload Your CV</label>
+              <label class="file-drop" for="cv">📎 Click to attach your CV (PDF, DOC)</label>
+              <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" style="display:none;" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top:22px;width:100%;justify-content:center;">Send Application</button>
+          <p class="form-note" style="display:none;margin-top:16px;color:var(--green-bright);font-weight:600;text-align:center;"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+  <script src="js/main.js"></script>
+  <script>
+    // show selected file name in the drop label
+    const cv = document.getElementById('cv');
+    if (cv) cv.addEventListener('change', () => {
+      const label = document.querySelector('.file-drop');
+      if (cv.files.length) label.textContent = '📎 ' + cv.files[0].name;
+    });
+  </script>
+</body>
+</html>
